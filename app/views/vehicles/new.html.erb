@@ -1,0 +1,39 @@
+<h1>New Vehicle</h1>
+
+
+
+<%= form_for :vehicle, url: vehicles_path do |f| %>
+    <% if @vehicle.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@vehicle.errors.count, "error") %> prohibited
+            this vehicle from being saved:
+          </h2>
+          <ul>
+            <% @vehicle.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+  <p>
+    <%= f.label :'license plate number' %><br><br>
+    <%= f.text_field :plate_number, required: true, maxlength: 7, pattern: "[A-Z A-Z A-Z 0-9 0-9 0-9 0-9]{7,}",  class: 'h1' %>
+    <%= f.label(:aapl, 'Format example : PBO4206') %>
+  </p>
+ 
+  <p>
+    <%= f.label :'Date' %><br>
+    <%= f.text_field :matriculation_date, placeholder:'dd/mm/yyyy', class: 'form-control datepicker' %>
+  </p>
+
+  <p>
+    <%= f.label :Time %><br>
+    <%= f.time_select :time, :default => Time.now%>
+  </p>
+
+  <p>
+    <%= f.submit 'Verify' %>
+  </p>
+    <%= link_to 'Back', :back %>
+<% end %>
